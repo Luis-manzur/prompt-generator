@@ -1,0 +1,16 @@
+{% extends 'web/base.html' %}
+{% block content %}
+<h2>Projects</h2>
+
+<form hx-post="{% url 'web-projects' %}" hx-target="#project-list" hx-swap="outerHTML"
+      hx-on::after-request="this.reset()">
+  {% csrf_token %}
+  <label for="name">Name</label>
+  <input id="name" name="name" required>
+  <label for="description">Description (optional)</label>
+  <input id="description" name="description">
+  <button type="submit">Create project</button>
+</form>
+
+{% include 'web/_project_list.html' %}
+{% endblock %}

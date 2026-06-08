@@ -8,6 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
+RUN chown -R appuser /app
 
 USER appuser
 WORKDIR /app/src

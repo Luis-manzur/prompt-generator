@@ -1,0 +1,21 @@
+<div id="project-list" class="panel">
+  {% if projects %}
+    <ul>
+      {% for p in projects %}
+        <li class="row">
+          <span>
+            <a href="{% url 'web-project-detail' p.id %}">{{ p.name }}</a>
+            {% if p.description %}<span class="muted"> — {{ p.description }}</span>{% endif %}
+            <span class="muted"> · {{ p.files.count }} file{{ p.files.count|pluralize }}</span>
+          </span>
+          <button class="ghost"
+                  hx-post="{% url 'web-project-delete' p.id %}"
+                  hx-target="#project-list" hx-swap="outerHTML"
+                  hx-confirm="Delete project “{{ p.name }}” and all its files?">delete</button>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">No projects yet.</p>
+  {% endif %}
+</div>

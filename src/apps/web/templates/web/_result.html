@@ -1,0 +1,17 @@
+{% if error %}
+  <div class="panel err">{{ error }}</div>
+{% else %}
+  <div class="panel">
+    <div class="row">
+      <h2>Improved prompt</h2>
+      <span class="muted">
+        {{ job.raw_tokens }} → {{ job.improved_tokens }} tokens
+        <strong class="{% if job.token_delta <= 0 %}delta-good{% else %}delta-bad{% endif %}">
+          ({% if job.token_delta > 0 %}+{% endif %}{{ job.token_delta }})
+        </strong>
+        · {{ job.model_used }}
+      </span>
+    </div>
+    <pre>{{ job.improved_prompt }}</pre>
+  </div>
+{% endif %}

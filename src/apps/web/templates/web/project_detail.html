@@ -1,0 +1,21 @@
+{% extends 'web/base.html' %}
+{% block content %}
+<div class="row">
+  <h2>{{ project.name }}</h2>
+  <a class="muted" href="{% url 'web-projects' %}">← all projects</a>
+</div>
+{% if project.description %}<p class="muted">{{ project.description }}</p>{% endif %}
+
+<form hx-post="{% url 'web-file-upload' project.id %}"
+      hx-target="#file-list" hx-swap="outerHTML"
+      hx-encoding="multipart/form-data"
+      hx-on::after-request="this.reset()">
+  {% csrf_token %}
+  <label for="file">Upload .md file</label>
+  <input id="file" name="file" type="file" accept=".md,.markdown,.txt">
+  <button type="submit">Upload</button>
+  <p class="muted">Re-uploading a file with the same name replaces it and bumps its version.</p>
+</form>
+
+{% include 'web/_file_list.html' %}
+{% endblock %}

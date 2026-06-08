@@ -5,5 +5,6 @@ python-decouple==3.8
 requests==2.31.0
 tiktoken==0.7.0
 gunicorn==22.0.0
+whitenoise==6.6.0
 pytest==7.4.4
 pytest-django==4.8.0

@@ -1,0 +1,17 @@
+<div id="file-list" class="panel">
+  {% if project.files.all %}
+    <ul>
+      {% for f in project.files.all %}
+        <li class="row">
+          <span>{{ f.filename }} <span class="muted">v{{ f.version }} · {{ f.content|length }} chars</span></span>
+          <button class="ghost"
+                  hx-post="{% url 'web-file-delete' project.id f.id %}"
+                  hx-target="#file-list" hx-swap="outerHTML"
+                  hx-confirm="Delete {{ f.filename }}?">delete</button>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">No context files yet.</p>
+  {% endif %}
+</div>
